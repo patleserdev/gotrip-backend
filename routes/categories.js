@@ -31,7 +31,7 @@ router.post("/", async function (req, res, next) {
     return;
   }
 
-  const newCategorie = new Marker({
+  const newCategorie = new Categorie({
     title: req.body.title,
    
   });
@@ -44,17 +44,11 @@ router.post("/", async function (req, res, next) {
  * Update marker
  */
 router.put("/:id", async function (req, res, next) {
-  const updateMarker = {
+  const updateCategorie = {
     title: req.body.title,
-    categorie: {
-      title: req.body.categorie.title,
-    },
-    latitude: req.body.latitude,
-    longitude: req.body.longitude,
-    isFavorite: req.body.isFavorite,
   };
 
-  const response = await Marker.updateOne({ _id: req.params.id }, updateMarker);
+  const response = await Categorie.updateOne({ _id: req.params.id }, updateCategorie);
   if (response.modifiedCount == 1) {
     res.json({ result: true, message: `${req.params.id}` });
   } else {
@@ -66,7 +60,7 @@ router.put("/:id", async function (req, res, next) {
  * Remove marker
  */
 router.delete("/:id", async function (req, res, next) {
-  const response = await Marker.deleteOne({ _id: req.params.id });
+  const response = await Categorie.deleteOne({ _id: req.params.id });
   if (response.ok) {
     res.json({ result: true, message: "Marker supprimé" });
   } else {

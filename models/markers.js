@@ -10,6 +10,10 @@ const markerSchema = new mongoose.Schema({
   isFavorite: {
     type: Boolean,
     default: false
+  },
+  user: {
+    type: mongoose.ObjectId,
+    ref: 'User',
   }
 });
 
