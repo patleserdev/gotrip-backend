@@ -2,11 +2,11 @@ var express = require("express");
 var router = express.Router();
 const User = require("../models/users.js");
 const { checkBody } = require("../modules/checkBody.js");
-
+const  auth = require("../middlewares/auth")
 /**
  * Return users
  */
-router.get("/", async function (req, res, next) {
+router.get("/",auth, async function (req, res, next) {
   const users = await User.find();
   res.json({ result: true, datas: users });
 });
@@ -14,7 +14,7 @@ router.get("/", async function (req, res, next) {
 /**
  * Return user ID
  */
-router.get("/:id", async function (req, res, next) {
+router.get("/:id",auth, async function (req, res, next) {
   if (req.params.id) {
     const user = await User.findOne({ _id: req.params.id });
     res.json({ result: true, datas: user });
@@ -52,7 +52,7 @@ router.post("/", async function (req, res, next) {
 /**
  * Update user
  */
-router.put("/:id", async function (req, res, next) {
+router.put("/:id",auth, async function (req, res, next) {
   const updateUser = {
     username: req.body.username,
     email: req.body.email,
@@ -70,7 +70,7 @@ router.put("/:id", async function (req, res, next) {
 /**
  * Remove user
  */
-router.delete("/:id", async function (req, res, next) {
+router.delete("/:id",auth, async function (req, res, next) {
   const response = await User.deleteOne({ _id: req.params.id });
   if (response.ok) {
     res.json({ result: true, message: "User supprimé" });

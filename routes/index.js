@@ -14,7 +14,7 @@ const  auth = require("../middlewares/auth")
 // router.use('/markers', markersRouter);
 // router.use('/categories', categoriesRouter);
 router.use('/', authRouter);
-router.use('/users',auth, usersRouter);
+router.use('/users', usersRouter);
 router.use('/markers',auth, markersRouter);
 router.use('/categories',auth, categoriesRouter);
 
