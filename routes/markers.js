@@ -1,6 +1,5 @@
 var express = require("express");
 var router = express.Router();
-var connection = require("../models/connection.js");
 const Marker = require("../models/markers.js");
 const { checkBody } = require("../modules/checkBody.js");
 
